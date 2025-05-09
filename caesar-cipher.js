@@ -1,34 +1,26 @@
-
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 function cipher (text, key) {
-
     let cipheredLettersArray = [];
 
     for(let i = 0; i < text.length; i++){
         const character = text[i].toUpperCase();
         
-        if(character === " "){
-            cipheredLettersArray.push(" ")
+        if(character === " "){ // Keep spaces unchanged
+            cipheredLettersArray.push(" ");
         }
 
-        for(let x=0; x < alphabet.length; x++ ){
+        for(let x = 0; x < alphabet.length; x++){
             if(alphabet[x] === character){
-                const length = alphabet.length
-                const new_index = (key + x) % length
-
-                const cipheredletter = alphabet[new_index]
-
-                cipheredLettersArray.push(cipheredletter);
+                const new_index = (key + x) % alphabet.length; // Shift letter index
+                
+                cipheredLettersArray.push(alphabet[new_index]); // Add ciphered letter
             }
         }
     }
 
-    const cipherText = cipheredLettersArray.join("")
-
-    return cipherText;
+    return cipheredLettersArray.join(""); // Return final text
 }
 
 const text = cipher('hello world', 4);
 console.log(text);
-
